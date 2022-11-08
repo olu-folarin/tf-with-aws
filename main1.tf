@@ -18,3 +18,20 @@ resource "aws_iam_user" "folarin" {
       description = "Technical Team Leader and migration craftsman"
     }
 }
+
+# giving access/permissions to the user above
+resource "aws_iam_policy" "admin" {
+  name = "AdminUser"
+  policy = <<EOF
+  {
+    "version": "0212-10-17",
+    "statement": [
+      {
+        "Effect": "Allow",
+        "Action": "*",
+        "Resource": "*"
+      }
+    ]
+  }
+  EOF
+}
