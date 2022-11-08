@@ -22,8 +22,7 @@ resource "aws_iam_user" "folarin" {
 # giving access/permissions to the user above
 resource "aws_iam_policy" "admin" {
   name = "AdminUser"
-  policy = <<EOF
-  {
+  policy = jsonencode({
     "version": "0212-10-17",
     "statement": [
       {
@@ -32,12 +31,11 @@ resource "aws_iam_policy" "admin" {
         "Resource": "*"
       }
     ]
-  }
-  EOF
+  })
 }
 
 # attach the policy using the aws_iam_policy_attachment resource
-resource "aws_iam_policy_attachment" "folaR_admin_access" {
-  user = aws_iam_user.admin-user.name
+resource "aws_iam_user_policy_attachment" "folaR_admin_access" {
+  user = aws_iam_user.folarin.name
   policy_arn = aws_iam_policy.admin.arn
 }
