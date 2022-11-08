@@ -23,12 +23,12 @@ resource "aws_iam_user" "folarin" {
 resource "aws_iam_policy" "admin" {
   name = "AdminUser"
   policy = jsonencode({
-    "version": "0212-10-17",
-    "statement": [
+    Version = "2012-10-17"
+    Statement = [
       {
-        "Effect": "Allow",
-        "Action": "*",
-        "Resource": "*"
+        Effect = "Allow",
+        Action = "*",
+        Resource = "*"
       }
     ]
   })
