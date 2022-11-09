@@ -62,22 +62,33 @@ resource "aws_iam_group" "product-data" {
 }
 
 # to allow the group access to your s3, create an s3 bucket policy using the iam group's arn
-resource "aws_s3_bucket_policy" "product-policy" {
-  bucket = aws_s3_bucket.product_team.id
-  # define the policy
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action   = "*"
-        Effect   = "Allow"
-        Resource = "arn:aws:s3:::${aws_s3_bucket.product_team.id}/*"
-        Principal = {
-          "AWS" = [
-            "${resource.aws_iam_group.product-data.arn}"
-          ]
-        }
-      }
-    ]
-  })
+# resource "aws_s3_bucket_policy" "product-policy" {
+#   bucket = aws_s3_bucket.product_team.id
+#   # define the policy
+#   policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Action   = "*"
+#         Effect   = "Allow"
+#         Resource = "arn:aws:s3:::${aws_s3_bucket.product_team.id}/*"
+#         Principal = {
+#           "AWS" = [
+#             "${resource.aws_iam_group.product-data.arn}"
+#           ]
+#         }
+#       }
+#     ]
+#   })
+# }
+
+# dynamodb
+resource "aws_dynamodb_table" "devs" {
+  name = "devs"
+  hash_key = "VIN"
+  billing_mode = "PAY_PER_REQUEST"
+  attribute {
+    name = "VIN"
+    type = "S"
+  }
 }
