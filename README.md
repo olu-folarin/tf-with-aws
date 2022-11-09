@@ -5,3 +5,7 @@
 ### After doing this, you you need attach the policy to the select user or group of users using the "aws_iam_policy_attachment" resource as this will guarantee its use.
 
 ## creating an s3 bucket resource block entails the bucket argument, tags and other metadata as you so choose.
+### To store objects in the bucket, you need create an aws_s3_bucket_object resource which takes 3 arguments:
+####    bucket to connect to
+####    bucket name (key)
+####    object path
