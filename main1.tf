@@ -54,3 +54,29 @@ resource "aws_s3_object" "product-doc" {
   key    = "new_product"
   source = "productteam.txt"
 }
+
+# to grant a group access to the s3 object, first create a data source that allows tf read the attributes of the group.
+data "aws_iam_group" "product-data" {
+  group_name = "product_team"
+}
+
+# to allow the group access to your s3, create an s3 bucket policy using the iam group's arn
+resource "aws_s3_bucket_policy" "product-policy" {
+  bucket = aws_s3_bucket.product_team.id
+  # define the policy
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = "*"
+        Effect   = "Allow"
+        Resource = "arn:aws:s3:::${aws_s3_bucket.product_team.id}"
+        Principal = {
+          "AWS" = [
+            "${data.aws_iam_group.product-data.arn}"
+          ]
+        }
+      }
+    ]
+  })
+}
