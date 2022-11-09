@@ -84,8 +84,8 @@ resource "aws_iam_group" "product-data" {
 
 # dynamodb
 resource "aws_dynamodb_table" "devs" {
-  name = "devs"
-  hash_key = "VIN"
+  name         = "devs"
+  hash_key     = "VIN"
   billing_mode = "PAY_PER_REQUEST"
   attribute {
     name = "VIN"

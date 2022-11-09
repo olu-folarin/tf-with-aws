@@ -9,3 +9,6 @@
 ####    bucket to connect to
 ####    bucket name (key)
 ####    object path
+
+## To store data, a database of choice on aws is dynamodb. You create it with the aws_dynamodb_table resource along with all its arguments. Note that its primary key is the hash_key key.
+#### In order to add data to the db, you use the aws_dynamodb_table_item which takes the name of the table created ealier as well as its hash_key and a json file which contains the data its meant for.
