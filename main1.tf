@@ -39,3 +39,11 @@ resource "aws_iam_user_policy_attachment" "folaR_admin_access" {
   user = aws_iam_user.folarin.name
   policy_arn = aws_iam_policy.admin.arn
 }
+
+# an s3 bucket for the product team
+resource "aws_s3_bucket" "product_team" {
+  bucket = "product-01"
+  tags = {
+    description = "product lifecycle"
+  }
+}
