@@ -85,10 +85,22 @@ resource "aws_iam_group" "product-data" {
 # dynamodb
 resource "aws_dynamodb_table" "devs" {
   name         = "devs"
-  hash_key     = "VIN"
+  hash_key     = "devHashKey"
   billing_mode = "PAY_PER_REQUEST"
   attribute {
-    name = "VIN"
+    name = "devHashKey"
     type = "S"
   }
 }
+
+# resource "aws_dynamodb_table_item" "devs-details" {
+#   table_name = aws_dynamodb_table.devs.name
+#   hash_key   = aws_dynamodb_table.devs.hash_key
+#   item = jsonencode({
+#     attribute = { name = { "S" : "samuel" }
+#       stack               = { "S" : "backend-dev" }
+#       years-of-experience = { "N" : 5 }
+#       location            = { "S" : "Nigeria" }
+#     }
+#   })
+# }
