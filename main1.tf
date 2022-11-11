@@ -11,16 +11,6 @@ provider "aws" {
   region = var.region
 }
 
-# configuring the backend to store the state file
-terraform {
-  backend "s3" {
-    bucket = "folarin-terraform-state-bucket0"
-    key = "product/terraform.tfstate"
-    region = var.region
-    dynamodb_table = "state-locking"
-  }
-}
-
 # identityand access management config for the admin
 resource "aws_iam_user" "folarin" {
   name = "folaR"
