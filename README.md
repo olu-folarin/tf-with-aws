@@ -13,3 +13,9 @@
 ## To store data, a database of choice on aws is dynamodb. You create it with the aws_dynamodb_table resource along with all its arguments. Note that its primary key is the hash_key key.
 #### In order to add data to the db, you use the aws_dynamodb_table_item which takes the name of the table created ealier as well as its hash_key and a json file which contains the data its meant for.
 #### For actual formatting, check the main.tf file.
+
+## It's good practice to store the state file on a cloud platform. And in this case, on an aws s3 bucket and dynamodb for state locking and consistency. This entails writing a backend "s3" block within the terraform block which will take the following arguments:
+#### key
+#### bucket
+#### region
+#### dynamodb_table
